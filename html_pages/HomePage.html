@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- External css and js files -->
+    <link rel="stylesheet" type="text/css" href="static/styles/index_style.css">
+    <script src="static/scripts/helperFuncs.js"></script>
+    <title>Home page</title>
+</head>
+
+
+
+<body>
+
+
+
+    <div class="navbar">
+        <div class="row text-center">
+            <div class="col">
+            <a class="navbar-brand ml-3 mt-1" href="/">
+                <img src="/static/homeIcon.png" alt="" style="width:25px;height:25px;">
+                <p>Home</p>
+            </a>
+            </div>
+            <div class="col">
+            <a class="nav-link" href="/pokemons">
+                <img src="/static/listIcon.png" alt="" style="width:25px;height:25px;">
+                <p>Pokemon list</p>
+            </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-2"></div>
+            <div class="col-8 text-center mt-5">
+                <img src="/static/logo3.png" alt="" style="width:750px;height:600px;">
+                <h1>Welcome to the Pokeda</h1>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 mt-2">
+                <p style="background-color:rgba(135, 135, 135, 0.35);">in this website you will find all the information of the 151 "original" pokemons<br>
+                    each pokemon have his own name ,picture ,types and stats.<br>
+                    the stats are:<br>
+                    HP - (Hit Points) is the pokemon life force, if his HP is zero the pokemon faint and no longer able to fight.<br>
+                    Attack & Sp.Attack - measure the strength of moves used by your Pokemon.<br>
+                    Defense & Sp.Defense - measure the ability to take attacks from other Pokemon.<br>
+                    Speed - The Speed stat decides which Pokémon will make the first move in battle.<br>
+                </p>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 text-center mt-5">
+                <a id="mostViewed" href="/pokemons" class="btn btn-primary">All pokemons list</a>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <!-- Template table of top 3 pokemons(updated in script). -->
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 text-center mt-5">
+                <table class="table table-border mt-5 ">
+                    <caption>
+                       3 top most viewed Pokemons
+                    </caption>
+                    <tr>
+                        <td class="w-25">
+                            <a href="" id="1ImgLink">
+                                <img id="1MaxPopImg" src="" class="img-fluid" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="" id="1MaxPop"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-25">
+                            <a href="" id="2ImgLink">
+                                <img id="2MaxPopImg" src="" class="img-fluid" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="" id="2MaxPop"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="w-25">
+                            <a href="" id="3ImgLink">
+                                <img id="3MaxPopImg" src="" class="img-fluid" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <a href="" id="3MaxPop"></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function updateMax3(max3) { //Function to update the top 3 pokemons.
+            max3.forEach(maxPokemon => {
+                if (maxPokemon.popularity != 0) {
+                    //Update Pokemon's name (as a link).
+                    document.getElementById(`${maxPokemon.index}MaxPop`).innerHTML = `<h3>${maxPokemon.pokemon.name} </h3>`;
+                    document.getElementById(`${maxPokemon.index}MaxPop`).href = `pokemons/${maxPokemon.pokemon.id}`;
+
+                    //Update pokemon's img (as a link).
+                    var idPath = getFullId(maxPokemon.pokemon.id); //Add leading zeroes to ID.
+                    document.getElementById(`${maxPokemon.index}MaxPopImg`).src = `static/pokemon-data/images/${idPath}.png`;
+                    document.getElementById(`${maxPokemon.index}ImgLink`).href = `pokemons/${maxPokemon.pokemon.id}`;
+                }
+            });
+        }
+
+        fetch("/max3").then(res => res.json()).then(updateMax3); //Get json data of top 3 popular pokemons.
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

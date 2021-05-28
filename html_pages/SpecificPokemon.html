@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- External css and js files -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/pokemons_style.css">
+    <script src="../static/scripts/helperFuncs.js"></script>
+    <title>Hello, world!</title>
+</head>
+
+<div class="navbar">
+    <div class="row text-center">
+        <div class="col">
+        <a class="navbar-brand ml-3 mt-1" href="/">
+            <img src="/static/homeIcon.png" alt="" style="width:25px;height:25px;">
+            <p>Home</p>
+        </a>
+        </div>
+        <div class="col">
+        <a class="nav-link" href="/pokemons">
+            <img src="/static/listIcon.png" alt="" style="width:25px;height:25px;">
+            <p>Pokemon list</p>
+        </a>
+        </div>
+    </div>
+</div>
+
+    <!-- Create a pokemon page template(updated in script). -->
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <h1 id="pokTitle" class="text-center mt-5"></h1>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <img id="pokImg" src="" alt="" class="mt-3">
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <ul id="pokTypes" class="list-group list-group-horizontal borderless mt-3"></ul>
+            </div>
+            <div class="col-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <table class="table table-bordered mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-center" scope="col">HP</th>
+                            <th class="text-center" scope="col">Attack</th>
+                            <th class="text-center" scope="col">Defense</th>
+                            <th class="text-center" scope="col">Sp. Attack</th>
+                            <th class="text-center" scope="col">Sp. Defense</th>
+                            <th class="text-center" scope="col">Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="baseTblRow"></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 text-center mt-5">
+                <a id="mostViewed" href="/pokemons" class="btn btn-primary">Back to all pokemons list<br>
+                    <img src="/static/leftArrow.png" alt="" style="width:25px;height:25px;">
+                </a>
+                
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateSpecificPokemon(pokemon) {
+            document.getElementById("pokTitle").innerHTML = `#${pokemon.id} ${pokemon.name}`;
+            var idPath = getFullId(pokemon.id); //Add leading zeroes to ID.
+
+            document.getElementById("pokImg").src = `/static/pokemon-data/images/${idPath}.png`;
+
+            let types = "";
+            pokemon.type.forEach(currentType => { //Add the type class (for coloring).
+                types += `<li class="list-group-item mr-2 ${currentType}-type">${currentType}</li>`;
+            });
+            document.getElementById("pokTypes").innerHTML += types;
+
+            let td = ""; //Fill the table.
+            td += `<td class="text-center"> ${pokemon.base["HP"]} </td>`;
+            td += `<td class="text-center"> ${pokemon.base["Attack"]} </td>`;
+            td += `<td class="text-center"> ${pokemon.base["Defense"]} </td>`;
+            td += `<td class="text-center"> ${pokemon.base["Sp. Attack"]} </td>`;
+            td += `<td class="text-center"> ${pokemon.base["Sp. Defense"]} </td>`;
+            td += `<td class="text-center"> ${pokemon.base["Speed"]} </td>`;
+
+            document.getElementById("baseTblRow").innerHTML = td;
+        }
+
+        fetch('../api' + window.location.pathname, {
+            method: 'POST'
+        }).then(x => x.json()).then(updateSpecificPokemon); //Get json data of specific pokemon and increase popularity.
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

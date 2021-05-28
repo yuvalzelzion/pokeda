@@ -1,0 +1,119 @@
+body {
+    background-image: url(/static/bcgknd.png);
+    background-repeat: repeat-x repeat-y;
+}
+
+a {
+    color: black;
+}
+
+#pokImg {
+    width: 300px;
+    height: auto;
+}
+
+#pokImgThumb {
+    width: 200px;
+    height: auto;
+}
+
+.Fire-type {
+    background-color: red;
+}
+
+.Ground-type {
+    background-color: brown;
+    color: white;
+}
+
+.Electric-type {
+    background-color: yellow;
+}
+
+.Grass-type {
+    background-color: lightgreen;
+}
+
+.Poison-type {
+    background-color: purple;
+    color: white;
+}
+
+.Water-type {
+    background-color: aqua;
+}
+
+.Fairy-type {
+    background-color: pink;
+}
+
+.Normal-type {
+    background-color: beige;
+}
+
+.Flying-type {
+    background-color: lightskyblue;
+}
+
+.Bug-type {
+    background-color: darkgreen;
+    color: white;
+}
+
+.Fighting-type {
+    background-color: orange;
+    color: white;
+}
+
+.Psychic-type {
+    background-color: teal;
+    color: white;
+}
+
+.Rock-type {
+    background-color: gray;
+    color: white;
+}
+
+.Ice-type {
+    background-color: lightblue;
+}
+
+.Ghost-type {
+    background-color: mediumpurple;
+    color: white;
+}
+
+.Dragon-type {
+    background-color: salmon;
+}
+
+
+/* The navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: rgba(135, 135, 135, 0.35);
+    position: fixed;
+    top: 0;
+    width: 20%;
+  }
+  
+  /* Links inside the navbar */
+  .navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  /* Change background on mouse-over */
+  .navbar a:hover {
+    background: #ddd;
+    color: black;
+  }
+  
+  /* Main content */
+  .main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+  }
